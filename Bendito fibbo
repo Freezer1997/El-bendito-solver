@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fibonacci Solver</title>
+</head>
+
+<body>
+
+    <form id="Krystal">
+        <label for="Uno">Primer : </label>
+        <input type="text" name="Uno" id="re_Uno">
+        <br>
+        <hr>
+        <label for="Dos">Segundo: </label>
+        <input type="text" name="Dos" id="re_Dos">
+        <br>
+        <hr>
+        <label for="maximo">Máximo : </label>
+        <input type="text" name="maximo" id="re_maximo">
+        <br>
+        <hr>
+        <br>
+        <input type="button" value="Calcular serie" id="botonSolver">
+        <br>
+        <br>
+        <input type="button" value="CalcularPares" id="botonesPares">
+        <br>
+        <br>
+        <br>
+        <input type="button" value="CalcularImpares" id="botonesImpares">
+        <br>
+        <br>
+        <label for="Multiplos">Multiplos de: </label>
+        <input type="text" name="multiplo" id="re_multiplos">
+        
+        <input type="button" value="Calcular Multiplos" id="botonesMultiplos">
+        <br>
+        <br>
+        <label for="busqueda">Encontrar: </label>
+        <input type="text" name="Buscar" id="re_seek">
+        
+        <input type="button" value="Busca Numero" id="btn_seek">
+        <br>
+    </form>
+    <br>
+    <input type="button" value="Ver Tabla" id="btnGenerar">
+    <br><br><br>
+<hr>
+    <table id="tablaSerie"  border="1">
+
+        <tbody id="tbody">
+
+        </tbody>
+<br>
+        <tbody id="tparesbody">
+
+        </tbody>
+<br>
+        <tbody id="timpabody">
+
+        </tbody>
+<br>
+        <tbody id="tMultibody">
+
+        </tbody>
+<br>
+        <tbody id="tSeekbody">
+
+        </tbody>
+    </table>
+ 
+</body>
+<script>
+    //clase
+    function Solver(p, s, m) {
+        this.Uno = U;
+        this.Dos = D;
+        this.maximo = m;
+        this.serie = [];
+        this.generar = generar;
+
+        function generar() {
+            this.serie.push(this.Uno)
+            this.serie.push(this.Dos);
+        }
+
+    }
+
+    var numeros = [];
+
+
+
+    var generadorFibonacci = function(anterior, ultimo) {
+        if (anterior + ultimo > maximoValorSerie) {
+            return numeros;
+        } else {
+            nuevo = anterior + ultimo;
+            numeros.push(nuevo);
+            return generadorFibonacci(ultimo, nuevo);
+        }
+    }
+    document.getElementById("botonSolver")
+    .addEventListener("click",function() {
+            UnoElemento = parseInt(document.getElementById("re_Uno").value);
+            DosElemento = parseInt(document.getElementById("re_Dos").value);
+            maximoValorSerie = parseInt(document.getElementById("re_maximo").value);
+            numeros.push(UnoElemento);
+            numeros.push(DosElemento);
+            generadorFibonacci(primerElemento, segundoElemento);
+
+        }
+    );
+    
+
+           var indice=0;
+            var tabla = document.getElementById("tbody");
+            var tabla1 = document.getElementById("tparesbody");
+            var tabla2 = document.getElementById("timpabody");
+            var tabla3 = document.getElementById("tMultibody");
+            var tabla4 = document.getElementById("tSeekbody");
+
+
+            
+document.getElementById("btnGenerar")
+.addEventListener("click",function muestraDatos(){
+    tabla1.style.display="none";
+    tabla2.style.display="none";
+    tabla3.style.display="none";
+    tabla4.style.display="none";
+     tabla.style.display="block";
+if(indice===numeros.length-1){
+
+        return true;
+}else{
+    
+    var fila = document.createElement("tr");
+    var fila1 = document.createElement("tr");
+    var fila2 = document.createElement("tr");
+    var td = document.createElement("td");
+    var td1 = document.createElement("td")
+    var td2 = document.createElement("td")
+    td.appendChild(document.createTextNode(numeros[indice]));
+    td1.appendChild(document.createTextNode(numeros[indice+1]));
+    td2.appendChild(document.createTextNode(numeros[indice+2]));
+    
+    fila.appendChild(td,);
+    fila.appendChild(td1);
+    fila.appendChild(td2);
+    tabla.appendChild(fila);
+    tabla.appendChild(fila1);
+    tabla.appendChild(fila2);
+    indice++;
+    muestraDatos(indice);
+}
+        })
+
+            
+     var indicep=0;
+    var tablap = document.getElementById("tparesbody");
+
+document.getElementById("botonesPares")
+.addEventListener("click",function mostarPares(){
+    tabla.style.display="none";
+    tabla2.style.display="none";
+    tabla3.style.display="none";
+    tabla4.style.display="none";
+    tabla1.style.display="block";
+    function esPares(item){
+    if(item%2===0){
+        return item;
+    }
+};
+
+var pares= numeros.filter(esPares);
+console.log(pares);
+    if(indicep===pares.length){
+
+return true;
+}else{
+
+var fila = document.createElement("tr");
+var td = document.createElement("td");
+td.appendChild(document.createTextNode(pares[indicep]));
+fila.appendChild(td,);
+tablap.appendChild(fila);
+indicep++;
+mostarPares(indicep);
+}
+})
+
+
+
+
+var indiceim=0;
+    var tablaim = document.getElementById("timpabody");
+    
+document.getElementById("botonesImpares")
+.addEventListener("click",function mostarPares(){
+    tabla1.style.display="none";
+    tabla.style.display="none";
+    tabla3.style.display="none";
+    tabla4.style.display="none";
+     tabla2.style.display="block";
+function esImpar(item){
+    if(item%2!=0){
+        return item;
+    }
+};
+
+
+var impares= numeros.filter(esImpar);
+console.log(impares);
+    if(indiceim===impares.length){
+
+return true;
+}else{
+
+var fila = document.createElement("tr");
+var td = document.createElement("td");
+td.appendChild(document.createTextNode(impares[indiceim]));
+fila.appendChild(td,);
+tablaim.appendChild(fila);
+indiceim++;
+mostarPares(indiceim);
+}
+})
+
+var indiceMult=0;
+    var tablaimul = document.getElementById("tMultibody");
+
+document.getElementById("botonesMultiplos")
+.addEventListener("click",function mostarPares(){
+    tabla1.style.display="none";
+    tabla2.style.display="none";
+    tabla.style.display="none";
+    tabla4.style.display="none";
+     tabla3.style.display="block";
+    function esMultiplo(item){
+    if(item%document.getElementById("re_multiplos").value===0){
+        return item;
+    }
+};
+var multi= numeros.filter(esMultiplo);
+console.log(multi);
+    if(indiceMult===multi.length){
+
+return true;
+}else{
+
+var fila = document.createElement("tr");
+var td = document.createElement("td");
+td.appendChild(document.createTextNode(multi[indiceMult]));
+fila.appendChild(td);
+tablaimul.appendChild(fila);
+indiceMult++;
+mostarPares(indiceMult);
+}
+})
+
+
+var indiceSeek=0;
+    var tablaiSeek = document.getElementById("tSeekbody");
+document.getElementById("btn_seek")
+.addEventListener("click",function(){
+    tabla1.style.display="none";
+    tabla2.style.display="none";
+    tabla.style.display="none";
+    tabla3.style.display="none";
+    tabla4.style.display="block";
+
+
+var seek = numeros.find(yourNumber);
+console.log(seek);
+
+
+function yourNumber(dato){
+ if(Number(document.getElementById("re_seek").value)===dato){
+     console.log(dato);
+     var fila = document.createElement("tr");
+    var td = document.createElement("td");
+    td.appendChild(document.getElementById("re_seek").value);
+    tr.appendChild(td);
+    tablaiSeek.appendChild(tr);
+
+ }
+}
+})
+
+</script>
+
+</html>
